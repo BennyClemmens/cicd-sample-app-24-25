@@ -23,8 +23,7 @@ _EOF_
 
 cd tempdir || exit
 docker build -t sampleapp .
-
-docker stop samplerunning
-docker remove samplerunning
+if [ "$(docker ps -q -f name=samplerunning)" ]; then docker stop samplerunning; fi
+if [ "$(docker ps -a -q -f name=samplerunning)" ]; then docker remove samplerunning; fi
 docker run -t -d -p 5050:5050 --name samplerunning sampleapp
 docker ps -a 
