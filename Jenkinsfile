@@ -16,7 +16,7 @@ pipeline {
             }
         }
         stage('Results') {
-            step {
+            steps {
                 build 'TestSampleApp'
             }
         }
