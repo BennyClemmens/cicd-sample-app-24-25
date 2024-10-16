@@ -3,16 +3,22 @@ pipeline {
 
     stages {
         stage('Preparation') {
-            catchError(buildResult: 'SUCCESS') {
-                sh 'docker stop samplerunning'
-                sh 'docker rm samplerunning'
+            steps {
+                catchError(buildResult: 'SUCCESS') {
+                    sh 'docker stop samplerunning || true'
+                    sh 'docker rm samplerunning || true'
+                }
             }
         }
         stage('Build') {
-            build 'BuildSampleApp'
+            steps {
+                build 'BuildSampleApp'
+            }
         }
         stage('Results') {
-            build 'TestSampleApp'
+            steps {
+                build job 'TestSampleApp'
+            }
         }
     }
 }
