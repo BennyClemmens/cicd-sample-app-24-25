@@ -16,8 +16,8 @@ pipeline {
             }
         }
         stage('Results') {
-            steps {
-                build job 'TestSampleApp'
+            step {
+                build 'TestSampleApp'
             }
         }
     }
